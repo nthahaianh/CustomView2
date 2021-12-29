@@ -1,4 +1,4 @@
-package com.example.balls.customview
+package com.example.customview2.customview
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -6,11 +6,8 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
-import android.widget.Toast
-import com.example.customview2.customview.MyBall
 import com.example.customview2.R
 import kotlinx.coroutines.*
 import kotlin.math.abs
@@ -66,13 +63,6 @@ class BallsView @JvmOverloads constructor(
         setMeasuredDimension(widthSpecSize, heightSpecSize)
     }
 
-    override fun onDraw(canvas: Canvas?) {
-        super.onDraw(canvas)
-        drawListBall(canvas)
-        autoUpAndDown()
-        invalidate()
-    }
-
     private fun initBalls() {
         listBalls.clear()
         for (i in sumBall - 1 downTo 0) { // ve tu phai sang
@@ -81,6 +71,13 @@ class BallsView @JvmOverloads constructor(
             val ball = MyBall(x, y)
             listBalls.add(ball)
         }
+    }
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+        drawListBall(canvas)
+        autoUpAndDown()
+        invalidate()
     }
 
     private fun drawListBall(canvas: Canvas?) {
@@ -157,25 +154,6 @@ class BallsView @JvmOverloads constructor(
             }
         }
     }
-//    private fun autoUpAndDown() {
-//        for (i in 0 until listBalls.size) {
-//            val ball = listBalls[i]
-//            jobAuto = CoroutineScope(Dispatchers.Default).launch {
-//                delay(TIME_DELAY_AUTO * i)
-//                if (isAuto && isActive) {
-//                    if (ball.isUp) {
-//                        ball.y -= DELTA_AUTO
-//                    } else {
-//                        ball.y += DELTA_AUTO
-//                    }
-//                    if (abs(ball.y - initCoordinatesY / 3.toFloat()) <= DELTA_AUTO)
-//                        ball.isUp = false
-//                    if (abs(ball.y - 2 * initCoordinatesY / 3) <= DELTA_AUTO)
-//                        ball.isUp = true
-//                }
-//            }
-//        }
-//    }
 
     private var jobBack: Job? = null
     private fun ballMoveBack(i: Int, newX: Float, newY: Float) {
