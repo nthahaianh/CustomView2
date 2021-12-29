@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ballbounce">
+        <attr name="sumBall" format="integer" />
+    </declare-styleable>
+</resources>
